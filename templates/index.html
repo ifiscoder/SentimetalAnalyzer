@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Sentiment Analyzer</title>
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<!-- Font-->
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/opensans-font.css') }}">
+	<link rel="stylesheet" type="text/css"
+		href="{{ url_for('static',filename='fonts/line-awesome/css/line-awesome.min.css') }}">
+	<!-- Jquery -->
+	<link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+	<!-- Main Style Css -->
+	<link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}" />
+
+
+	<style>
+		h1 {
+			color: green;
+		}
+
+		select {
+			-webkit-appearance: none;
+			-moz-appearance: none;
+			-ms-appearance: none;
+			appearance: none;
+			outline: 0;
+			background: #00acee;
+			background-image: none;
+			border: none;
+		}
+
+		.select {
+			position: relative;
+			display: block;
+			width: 20em;
+			height: 3em;
+			line-height: 3;
+			background: #2C3E50;
+			overflow: hidden;
+			border: none;
+		}
+
+		select {
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			padding: 0 0 0 .5em;
+			color: #fff;
+			cursor: pointer;
+			border: none;
+		}
+
+		select::-ms-expand {
+			display: none;
+		}
+
+		.select::after {
+			content: '\25BC';
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			padding: 0 1em;
+			background: #34495E;
+			pointer-events: none;
+		}
+
+		.select:hover::after {
+			color: #F39C12;
+		}
+	</style>
+</head>
+
+<body class="form-v4">
+	<div class="page-content">
+		<div class="form-v4-content">
+			<div class="form-left">
+				<h2>How it works?</h2>
+				<p class="text-1">Select the value of the (#)Hashtag. You can take any popular hashtag value for example
+					#influencer, #competetion, #influencermaketing, etc.<br><br>Enter a valid integer to limit the
+					number of records.</p>
+				<p class="text-2"><span>Note:</span> In case the total tweets are less than the mentioned number to
+					limit the records, then all the tweets will be fetched irrespective of entered value to limit the
+					records.</p>
+			</div>
+			<form class="form-detail" action="result" method="post" id="myform">
+				<h2>Analyze sentiment from particular Hashtag</h2>
+				<div class="form-row">
+					<label for="your_email">(#)Hashtag</label>
+					<input type="text" name="hashtag" id="hashtag" class="input-text" required>
+				</div>
+
+				<div class="form-row">
+					<label for="your_email">Limit Records to..</label>
+					<input type="text" name="limit" id="limit" class="input-text" required>
+				</div>
+
+				<label for="yesno"> Store to cloudant?</label>
+				<div class="select">
+					<select id="yesno" name="yesno">
+						<option value="yes">Yes</option>
+						<option value="no">No</option>
+					</select>
+				</div>
+				<br>
+				<div class="form-row-last">
+					<input type="submit" name="register" class="register" value="Analyze">
+				</div>
+			</form>
+		</div>
+	</div>
+	<script>
+		window.watsonAssistantChatOptions = {
+			integrationID: "105ad543-ebf1-4daa-bad7-f4ad14c6c9f4", // The ID of this integration.
+			region: "eu-gb", // The region your integration is hosted in.
+			serviceInstanceID: "7f33b9ef-d7a7-476e-8dd6-b167c487e7df", // The ID of your service instance.
+			onLoad: function(instance) { instance.render(); }
+		  };
+		setTimeout(function(){
+		  const t=document.createElement('script');
+		  t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+		  document.head.appendChild(t);
+		});
+	</script>
+</body>
+
+</html>
